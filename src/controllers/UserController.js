@@ -17,6 +17,7 @@ async index(request, response) {
  
 async auth(request, response) {
     const {email, password} = request.body;
+    console.log("bateu: " + email)
     const user = await User.findOne( { email }).select('+password');
     if(user){
         if (await bcrypt.compare(password, user.password)) {
