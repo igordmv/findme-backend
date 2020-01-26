@@ -7,6 +7,7 @@ const authMiddleware = require('./middlewares/auth')
 routes.get('/user/get', UserController.index);
 routes.post('/user/auth', UserController.auth);
 routes.post('/user/create', UserController.store);
+routes.get('/user/checkToken', authMiddleware, UserController.checkToken);
 routes.get('/products', authMiddleware, ProductController.test);
 
 module.exports = routes;

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth');
 
 function generateToken(params = {}){
+    console.log(params)
     return jwt.sign(params, authConfig.secret, {
         expiresIn: 86400,
         })
@@ -15,9 +16,13 @@ async index(request, response) {
     return response.json(users);
 },
  
+async checkToken(request, response){
+    return response.send({msg: "ok"});
+},
+
 async auth(request, response) {
     const {email, password} = request.body;
-    console.log("bateu: " + email)
+    console.log(request.body)
     const user = await User.findOne( { email }).select('+password');
     if(user){
         if (await bcrypt.compare(password, user.password)) {
