@@ -17,7 +17,13 @@ async index(request, response) {
 },
  
 async checkToken(request, response){
-    return response.send({msg: "ok"});
+    var userId = request.userId;
+    const user = await User.findById(userId);
+    console.log("user "+ userId);
+    var myJson = new Object();
+    myJson.message = "ok";
+    myJson.user = user;
+    return response.json(myJson);
 },
 
 async auth(request, response) {
